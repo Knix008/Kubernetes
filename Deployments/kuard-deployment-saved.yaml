@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2022-03-08T05:43:29Z"
+  generation: 4
+  name: kuard
+  namespace: default
+  resourceVersion: "46254"
+  uid: 857c8cd6-7930-4c6e-a8fb-33bb8677536e
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      run: kuard
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: kuard
+    spec:
+      containers:
+      - image: knix008/kuard-shkwon-amd64:1.0
+        imagePullPolicy: IfNotPresent
+        name: kuard
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2022-03-08T05:43:29Z"
+    lastUpdateTime: "2022-03-08T05:43:31Z"
+    message: ReplicaSet "kuard-656679684f" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2022-03-08T05:51:16Z"
+    lastUpdateTime: "2022-03-08T05:51:16Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 4
+  readyReplicas: 2
+  replicas: 2
+  updatedReplicas: 2

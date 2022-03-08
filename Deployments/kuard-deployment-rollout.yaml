@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+spec:
+  selector:
+    matchLabels:
+      run: kuard
+  replicas: 3
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: "Update to 2.0 kuard"
+      labels:
+        run: kuard
+    spec:
+      containers:
+      - name: kuard
+        image: knix008/kuard-shkwon-amd64:2.0
+        imagePullPolicy: Always
