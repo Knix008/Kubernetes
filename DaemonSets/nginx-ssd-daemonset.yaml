@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: nginx
+    ssd: "true"
+  name: nginx-ssd
+spec:
+  selector:
+    matchLabels:
+      name: nginx
+  template:
+    metadata:
+      labels:
+        name: nginx
+    spec:
+      nodeSelector:
+        ssd: "true"
+      containers:
+      - name: nginx
+        image: nginx
