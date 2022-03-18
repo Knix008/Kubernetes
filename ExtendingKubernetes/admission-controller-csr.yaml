@@ -1,0 +1,14 @@
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: validating-controller.default
+spec:
+  groups:
+    - system:authenticated
+  request: REPLACEME
+  signerName: validator.kuar.com/kube-apiserver-client
+  usages:
+    - digital signature
+    - key encipherment
+    - key agreement
+    - server auth
